@@ -1,0 +1,50 @@
+
+.RegionItem {
+    cursor: pointer;
+    width: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 4px 8px #cccccc;
+    margin: 5px;
+    background: white;
+    color: black;
+}
+.RegionItem:hover {
+    background: linear-gradient(40deg, #43bf5c 0%, #3ab4e3 90%);
+    color: white;
+}
+.info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.RegionItemBody {
+    padding: 0 0 0 0;
+}
+.title {
+    margin: 10px;
+    padding: 10px;
+}
+.gardenTitle {
+    margin-top: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #cccc;
+}
+.img {
+    width: 370px;
+    height: 230px;
+    border-bottom: 1px solid white;
+}
+.infoBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.infoContent {
+    font-family: 'Comfortaa', cursive;
+}
+.ListGroupItem {
+    color: black;
+}

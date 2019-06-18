@@ -13,9 +13,6 @@ const informationSchema = new  Schema({
       type: String,
       required: true
     },
-    number: {
-      type: String
-    },
     address:{
       type: String,
       required: true

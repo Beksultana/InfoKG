@@ -4,6 +4,7 @@ const config = require('./config');
 
 const Information = require('./models/Information');
 const Category = require('./models/Category');
+const User = require('./models/User');
 
 const run = async () => {
   await mongoose.connect(config.infoDb, config.mongoOptions);
@@ -13,6 +14,19 @@ const run = async () => {
     for(let collection of collections){
         await collection.drop();
     }
+
+    await User.create(
+        {
+            username: 'user',
+            password: "123",
+            role: 'user'
+        },
+        {
+            username: 'admin',
+            password: "123",
+            role: 'admin'
+        },
+    );
 
     const category = await Category.create(
         {title: "Оору каналар"},

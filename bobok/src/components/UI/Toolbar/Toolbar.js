@@ -1,21 +1,22 @@
-import React from 'react';
-import {Container, Nav, Navbar, NavbarBrand, NavItem, NavLink} from "reactstrap";
-import {NavLink as RouterNavLink} from 'react-router-dom';
+import React, {Fragment} from 'react';
+import {Container, Nav, Navbar, NavbarBrand} from "reactstrap";
 import './Toolbar.css';
+import UserMenu from "./Menus/UserMenu";
+import AnonymousMenu from "./Menus/AnonymousMenu";
 
-const Toolbar = () => {
+const Toolbar = ({user, logout}) => {
     return (
-        <Navbar className="Navbar" dark light expand="md">
+        <Navbar dark color="success" light expand="md">
             <Container>
                 <i className="fas fa-info-circle"></i>
                 <NavbarBrand href="/" className="Logo">InfoKG</NavbarBrand>
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink tag={RouterNavLink} to="/register">Катталуу</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink tag={RouterNavLink} to="/login">Кируу</NavLink>
-                    </NavItem>
+                    {
+                        user ?
+                            <Fragment>
+                                <UserMenu user={user} logout={logout}/>
+                            </Fragment> : <AnonymousMenu/>
+                    }
                 </Nav>
             </Container>
         </Navbar>

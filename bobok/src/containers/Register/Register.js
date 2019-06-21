@@ -1,78 +1,84 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from "react-redux";
-import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Col, Form, FormGroup} from "reactstrap";
+
 import {registerUser} from "../../store/actons/usersActions";
+import FormElement from "../../components/UI/Form/FormElement";
 
 class Register extends Component {
-
     state = {
         username: '',
         password: ''
     };
 
-    changeHandler = event => {
+    inputChangeHandler = event => {
         this.setState({
             [event.target.name]: event.target.value
-        })
+        });
     };
 
-    submitHandler = event => {
-      event.preventDefault();
-      this.props.registerSuccess({...this.state});
+    submitFormHandler = event => {
+        event.preventDefault();
+
+        this.props.registerUser({...this.state});
+    };
+
+    getFieldError = fieldName => {
+        return this.props.error && this.props.error.errors && this.props.error.errors[fieldName] && this.props.error.errors[fieldName].message;
     };
 
     render() {
         return (
-            <div className="formBlock">
-                <h5><strong>Катталуу формасы</strong></h5>
-                <hr/>
-                <div className="form">
-                    <Form onSubmit={this.submitHandler}>
-                        <FormGroup row>
-                            <Label for="username" sm={3}><strong>Логин</strong></Label>
-                            <Col sm={9}>
-                                <Input
-                                    type="text"
-                                    name="username"
-                                    id="username"
-                                    value={this.state.username}
-                                    onChange={this.changeHandler}
-                                />
-                            </Col>
-                        </FormGroup>
+            <Fragment>
+                <h2>Register new user</h2>
+                {this.props.error && this.props.error.global && (
+                    <Alert color="danger">
+                        {this.props.error.global}
+                    </Alert>
+                )}
 
-                        <FormGroup row>
-                            <Label for="password" sm={3}><strong>Сыр соз</strong></Label>
-                            <Col sm={9}>
-                                <Input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    value={this.state.password}
-                                    onChange={this.changeHandler}
-                                />
-                            </Col>
-                        </FormGroup>
+                <Form onSubmit={this.submitFormHandler}>
+                    <FormElement
+                        propertyName="username"
+                        title="Username"
+                        type="text"
+                        value={this.state.username}
+                        onChange={this.inputChangeHandler}
+                        error={this.getFieldError('username')}
+                        placeholder="Enter your desired username"
+                        autoComplete="new-username"
+                    />
 
-                        <FormGroup check row>
-                            <Col sm={{ size: 10, offset: 3 }}>
-                                <Button type="submit" color="primary">Катталуу</Button>
-                            </Col>
-                        </FormGroup>
-                    </Form>
-                </div>
-            </div>
+                    <FormElement
+                        propertyName="password"
+                        title="Password"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.inputChangeHandler}
+                        error={this.getFieldError('password')}
+                        placeholder="Enter new secure password"
+                        autoComplete="new-password"
+                    />
+
+                    <FormGroup row>
+                        <Col sm={{offset: 2, size: 10}}>
+                            <Button type="submit" color="primary">
+                                Register
+                            </Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
+            </Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    user: state.information.user
+    error: state.information.registerError
 });
 
 const mapDispatchToProps = dispatch => ({
-    registerSuccess: userData => dispatch(registerUser(userData))
+    registerUser: userData => dispatch(registerUser(userData))
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

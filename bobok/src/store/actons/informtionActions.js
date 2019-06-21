@@ -1,5 +1,6 @@
 import axios from '../../axios-api';
-import {CREATE_INFORMATION_SUCCESS, FETCH_INFORMATION_SUCCESS} from "./ActionsTypes";
+import {CREATE_INFORMATION_SUCCESS, FETCH_INFORMATION_SUCCESS} from "./actionsType";
+
 
 const fetchGardensSuccess = information => ({type: FETCH_INFORMATION_SUCCESS, information});
 const createInformationSuccess = () => ({type: CREATE_INFORMATION_SUCCESS});

@@ -1,28 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { ConnectedRouter} from 'connected-react-router';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-notifications/lib/notifications.css';
-import {createStore, combineReducers, applyMiddleware, } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import {Provider} from 'react-redux';
+import { ConnectedRouter} from 'connected-react-router';
+import * as serviceWorker from './serviceWorker';
+import store, {history} from "./store/configerStore";
 
-import {createBrowserHistory} from "history";
-import {connectRouter, routerMiddleware} from "connected-react-router";
-
-import infomationReducer from './store/reducers/infomationReducer';
-
-export const history = createBrowserHistory();
-
-const rootReducer = combineReducers({
-    router: connectRouter(history),
-    information: infomationReducer
-});
-
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, routerMiddleware(history)));
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
 
 const app = (
     <Provider store={store}>
@@ -33,5 +17,4 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
-
 serviceWorker.unregister();

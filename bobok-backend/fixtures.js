@@ -19,17 +19,19 @@ const run = async () => {
         {
             username: 'user',
             password: "123",
-            role: 'user'
+            role: 'user',
+            token: nanoid()
         },
         {
             username: 'admin',
             password: "123",
-            role: 'admin'
+            role: 'admin',
+            token: nanoid()
         },
     );
 
     const category = await Category.create(
-        {title: "Оору каналар"},
+        {title: "Ооруканалар"},
         {title: "Бала-бакчалар"},
         {title: "Ресторандар"},
         {title: "Стоматологиялык клиникалар"},

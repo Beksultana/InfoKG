@@ -42,9 +42,7 @@ class Information extends Component {
 
     render() {
 
-        console.log(this.props.user);
-
-        const categories = this.props.categories.map(category => {
+        const categories = this.props.categories ? this.props.categories.map(category => {
             return (
                 <ListGroupItem
                     onClick={() => this.categoryName(category)}
@@ -56,9 +54,9 @@ class Information extends Component {
                     {category.title}
                 </ListGroupItem>
             )
-        });
+        }) : null;
 
-        const information = this.props.information.map(item => {
+        const information = this.props.information ? this.props.information.map(item => {
             return (
                 <div onClick={() => this.showModal(item)} key={item._id} className="RegionItem">
                     <div className="RegionItemBody">
@@ -72,7 +70,7 @@ class Information extends Component {
                     </div>
                 </div>
             )
-        });
+        }) : null;
 
         return (
             <div className="infoContent" style={{marginTop: "20px"}}>
@@ -100,9 +98,11 @@ class Information extends Component {
                                     </strong>
                             </h5>
 
-                            <Link to="/new/information">
-                                <Button color="primary" >Жаны маалмат кошуу</Button>
-                            </Link>
+                            {
+                                this.props.user ? <Link to="/new/information">
+                                    <Button color="primary" >Жаны маалмат кошуу</Button>
+                                </Link> : null
+                            }
                         </div>
                         <hr/>
                         <div className="info">

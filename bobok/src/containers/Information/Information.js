@@ -42,6 +42,8 @@ class Information extends Component {
 
     render() {
 
+        console.log(this.props.user);
+
         const categories = this.props.categories.map(category => {
             return (
                 <ListGroupItem
@@ -139,7 +141,8 @@ class Information extends Component {
 
 const mapStateToProps = state => ({
     information: state.information.information,
-    categories: state.information.categories
+    categories: state.information.categories,
+    user: state.information.user
 });
 
 const mapDispatchToProps = dispatch => ({

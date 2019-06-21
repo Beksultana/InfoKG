@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import './NewInfo.css';
 import {connect} from "react-redux";
+import {createInformation} from "../../store/actons/informtionActions";
 
 class NewInfo extends Component {
 
@@ -10,7 +11,7 @@ class NewInfo extends Component {
         name: '',
         address: '',
         phone: '',
-        img: ''
+        image: '',
     };
 
     changeHandler = event => {
@@ -22,7 +23,20 @@ class NewInfo extends Component {
     fileChangeHandler = event => {
         this.setState({
             [event.target.name]: event.target.files[0]
-        })
+        });
+    };
+
+    submitFormHandler = event => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        Object.keys(this.state).forEach(key => {
+            formData.append(key, this.state[key]);
+        });
+
+        this.props.createInfo(formData);
+        this.props.history.push('/');
     };
 
     render() {
@@ -31,7 +45,8 @@ class NewInfo extends Component {
                 <h5><strong>Жаны маалымат кошуу</strong></h5>
                 <hr/>
                 <div className="form">
-                    <Form>
+
+                    <Form onSubmit={this.submitFormHandler}>
                         <FormGroup row>
                             <Label for="category" sm={3}><strong>Категория</strong></Label>
                             <Col sm={9}>
@@ -100,7 +115,7 @@ class NewInfo extends Component {
                             <Col sm={9}>
                                 <Input
                                     type="file"
-                                    name="img"
+                                    name="image"
                                     id="file"
                                     onChange={this.fileChangeHandler}
                                 />
@@ -109,7 +124,7 @@ class NewInfo extends Component {
 
                         <FormGroup check row>
                             <Col sm={{ size: 10, offset: 3 }}>
-                                <Button color="primary">Кошуу</Button>
+                                <Button type="submit" color="primary">Кошуу</Button>
                             </Col>
                         </FormGroup>
                     </Form>
@@ -123,4 +138,8 @@ const mapStateToProps = state => ({
     categories: state.information.categories
 });
 
-export default connect(mapStateToProps)(NewInfo);
+const mapDispatchToProps = dispatch => ({
+    createInfo: infoData => dispatch(createInformation(infoData))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewInfo);

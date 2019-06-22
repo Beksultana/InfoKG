@@ -30,7 +30,8 @@ class Register extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Register new user</h2>
+                <h2 style={{marginTop: '20px'}}>Катталуучу болукчо</h2>
+                <hr/>
                 {this.props.error && this.props.error.global && (
                     <Alert color="danger">
                         {this.props.error.global}
@@ -40,30 +41,30 @@ class Register extends Component {
                 <Form onSubmit={this.submitFormHandler}>
                     <FormElement
                         propertyName="username"
-                        title="Username"
-                        type="text"
+                        title="Логин"
+                        type="email"
                         value={this.state.username}
                         onChange={this.inputChangeHandler}
                         error={this.getFieldError('username')}
-                        placeholder="Enter your desired username"
+                        placeholder="aidasultan@gmail.com"
                         autoComplete="new-username"
                     />
 
                     <FormElement
                         propertyName="password"
-                        title="Password"
+                        title="Сыр соз"
                         type="password"
                         value={this.state.password}
                         onChange={this.inputChangeHandler}
                         error={this.getFieldError('password')}
-                        placeholder="Enter new secure password"
+                        placeholder="Бул жерге сыр созунузду жазыныз"
                         autoComplete="new-password"
                     />
 
                     <FormGroup row>
                         <Col sm={{offset: 2, size: 10}}>
-                            <Button type="submit" color="primary">
-                                Register
+                            <Button type="submit" color="success">
+                                Катталуу
                             </Button>
                         </Col>
                     </FormGroup>

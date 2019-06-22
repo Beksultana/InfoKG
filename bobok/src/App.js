@@ -10,6 +10,7 @@ import 'react-notifications/lib/notifications.css';
 import Login from "./containers/Login/Login";
 import {logoutUser} from "./store/actons/usersActions";
 import {connect} from "react-redux";
+import NewCategory from "./containers/NewCategory/NewCategory";
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
                       <Route path="/new/information" component={NewInfo}/>
                       <Route path="/register" component={Register}/>
                       <Route path="/login" component={Login}/>
+                      <Route path="/new/category" component={NewCategory}/>
                   </Switch>
               </Container>
           </Fragment>

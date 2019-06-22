@@ -25,7 +25,8 @@ class Login extends Component {
     render() {
         return (
             <Fragment>
-                <h2>Login</h2>
+                <h2 style={{marginTop: '20px'}}>Кируу учун болукчо</h2>
+                <hr/>
                 {this.props.error && (
                     <Alert color="danger">
                         {this.props.error.error || this.props.error.global}
@@ -35,28 +36,28 @@ class Login extends Component {
                 <Form onSubmit={this.submitFormHandler}>
                     <FormElement
                         propertyName="username"
-                        title="Username"
-                        type="text"
+                        title="Логин"
+                        type="email"
                         value={this.state.username}
                         onChange={this.inputChangeHandler}
-                        placeholder="Enter username you registered with"
+                        placeholder="aidasultan@gmail.com"
                         autoComplete="current-username"
                     />
 
                     <FormElement
                         propertyName="password"
-                        title="Password"
+                        title="Сыр соз"
                         type="password"
                         value={this.state.password}
                         onChange={this.inputChangeHandler}
-                        placeholder="Enter password"
+                        placeholder="Сыр созунузду жазыныз"
                         autoComplete="current-password"
                     />
 
                     <FormGroup row>
                         <Col sm={{offset: 2, size: 10}}>
-                            <Button type="submit" color="primary">
-                                Login
+                            <Button type="submit" color="success">
+                                Кируу
                             </Button>
                         </Col>
                     </FormGroup>

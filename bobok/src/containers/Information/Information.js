@@ -40,6 +40,11 @@ class Information extends Component {
         }
     }
 
+    newCategory = event => {
+        event.preventDefault();
+        this.props.history.push('/new/category');
+    };
+
     render() {
 
         const categories = this.props.categories ? this.props.categories.map(category => {
@@ -76,6 +81,13 @@ class Information extends Component {
             <div className="infoContent" style={{marginTop: "20px"}}>
                 <Row>
                     <Col sm={3}>
+                        {
+                            this.props.user ? <div style={{marginBottom: '10px'}}>
+                                <Button onClick={this.newCategory} color="warning">
+                                    Жаны категория кошуу
+                                </Button>
+                            </div> : null
+                        }
                         <ListGroup >
                             <ListGroupItem
                                 onClick={() => this.categoryName({title:"Бардыгы"})}
@@ -100,7 +112,7 @@ class Information extends Component {
 
                             {
                                 this.props.user ? <Link to="/new/information">
-                                    <Button color="primary" >Жаны маалмат кошуу</Button>
+                                    <Button color="warning" >Жаны маалмат кошуу</Button>
                                 </Link> : null
                             }
                         </div>

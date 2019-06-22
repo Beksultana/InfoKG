@@ -6,7 +6,7 @@ import AnonymousMenu from "./Menus/AnonymousMenu";
 
 const Toolbar = ({user, logout}) => {
     return (
-        <Navbar dark color="success" light expand="md">
+        <Navbar dark color="danger" light expand="md">
             <Container>
                 <i className="fas fa-info-circle"></i>
                 <NavbarBrand href="/" className="Logo">InfoKG</NavbarBrand>

@@ -4,7 +4,7 @@ import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "
 const UserMenu = ({user, logout}) => (
     <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret >
-            Hello, {user.username}!
+            Саламатсызбы, {user.username}!
         </DropdownToggle>
         <DropdownMenu right >
             <DropdownItem divider />

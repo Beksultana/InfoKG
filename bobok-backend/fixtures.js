@@ -23,9 +23,9 @@ const run = async () => {
             token: nanoid()
         },
         {
-            username: 'admin',
+            username: 'aidaraliuulu@gmail.com',
             password: "123",
-            role: 'admin',
+            role: 'aidaraliuulu@gmail.com',
             token: nanoid()
         },
     );

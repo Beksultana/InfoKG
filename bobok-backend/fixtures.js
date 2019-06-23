@@ -17,7 +17,7 @@ const run = async () => {
 
     await User.create(
         {
-            username: 'user',
+            username: 'user@gmail.com',
             password: "123",
             role: 'user',
             token: nanoid()

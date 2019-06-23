@@ -31,3 +31,9 @@ export const fetchInformation = (categoryId) => {
         )
     };
 };
+
+export const deleteInfo = id => {
+    return dispatch => {
+        return axios.delete('/information/' +id);
+    }
+};

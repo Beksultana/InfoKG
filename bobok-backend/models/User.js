@@ -19,7 +19,7 @@ const UserSchema = new Schema({
 
                 if (user) throw new Error();
             },
-            message: 'This username is already taken'
+            message: 'Мындай колдонуучу бар, ошого коп жинге тийбей башка жазчы! Уктунбу?!'
         }
     },
     role: {

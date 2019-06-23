@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {fetchInformation} from "../../store/actons/informtionActions";
+import {deleteInfo, fetchInformation} from "../../store/actons/informtionActions";
 import {connect} from "react-redux";
 import './Information.css';
 import {Link, NavLink} from "react-router-dom";
@@ -45,7 +45,14 @@ class Information extends Component {
         this.props.history.push('/new/category');
     };
 
+    deleteInfoHandler = ( id) => {
+        this.props.delteInfo(id);
+        this.props.history.push('/')
+    };
+
     render() {
+
+        console.log(this.props.user);
 
         const categories = this.props.categories ? this.props.categories.map(category => {
             return (
@@ -63,14 +70,18 @@ class Information extends Component {
 
         const information = this.props.information ? this.props.information.map(item => {
             return (
-                <div onClick={() => this.showModal(item)} key={item._id} className="RegionItem">
+                <div  key={item._id} className="RegionItem">
                     <div className="RegionItemBody">
+                        {this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
+                            <i onClick={() => this.deleteInfoHandler(item._id)} className="fas fa-backspace"></i>
+                            :null
+                        }
                         <img className="img"
                              src={"http://localhost:8000/uploads/" + item.image}
                              alt="Card image cap"
                         />
                         <div style={{width: "250px", margin: "0 auto"}}>
-                            <h6 className="title"><strong>{item.name}</strong></h6>
+                            <h6 onClick={() => this.showModal(item)} className="title"><strong>{item.name}</strong></h6>
                         </div>
                     </div>
                 </div>
@@ -82,7 +93,8 @@ class Information extends Component {
                 <Row>
                     <Col sm={3}>
                         {
-                            this.props.user ? <div style={{marginBottom: '10px'}}>
+                            this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
+                                <div style={{marginBottom: '10px'}}>
                                 <Button onClick={this.newCategory} color="warning">
                                     Жаны категория кошуу
                                 </Button>
@@ -111,8 +123,9 @@ class Information extends Component {
                             </h5>
 
                             {
-                                this.props.user ? <Link to="/new/information">
-                                    <Button color="warning" >Жаны маалмат кошуу</Button>
+                                this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
+                                <Link to="/new/information">
+                                <Button color="warning" >Жаны маалмат кошуу</Button>
                                 </Link> : null
                             }
                         </div>
@@ -159,7 +172,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchInformation: categoryId => dispatch(fetchInformation(categoryId)),
-    fetchCategories: () => dispatch(fetchCategories())
+    fetchCategories: () => dispatch(fetchCategories()),
+    delteInfo: id => dispatch(deleteInfo(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Information);

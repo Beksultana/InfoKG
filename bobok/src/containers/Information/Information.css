@@ -1,6 +1,5 @@
 
 .RegionItem {
-    cursor: pointer;
     width: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -21,10 +20,23 @@
 }
 .RegionItemBody {
     padding: 0 0 0 0;
+    position: relative;
+}
+.fa-backspace {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 35px;
+    color: #c81d28;
+}
+.fa-backspace:hover {
+    color: #a31821;
+    font-size: 40px;
 }
 .title {
     margin: 10px;
     padding: 10px;
+    cursor: pointer;
 }
 .gardenTitle {
     margin-top: 10px;

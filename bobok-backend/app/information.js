@@ -51,4 +51,10 @@ router.post('/', upload.single('image'), (req, res) => {
 
 });
 
+router.delete('/:id', (req, res) => {
+   Information.findByIdAndDelete({_id: req.params.id})
+       .then(result => res.send(result))
+       .catch(error => res.send(error))
+});
+
 module.exports = router;

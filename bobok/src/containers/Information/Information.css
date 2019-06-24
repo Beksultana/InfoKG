@@ -22,16 +22,37 @@
     padding: 0 0 0 0;
     position: relative;
 }
-.fa-backspace {
+.deleteInfo {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 35px;
-    color: #c81d28;
+    font-size: 25px;
+    color: #eee;
 }
-.fa-backspace:hover {
-    color: #a31821;
-    font-size: 40px;
+.deleteInfo:hover {
+    color: #fff;
+    font-size: 30px;
+}
+.deleteCategory {
+    width: 30%;
+}
+.deleteCategoryItem{
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+}
+.deleteCategoryItem > i {
+    margin: 0 5px;
+    font-size: 20px;
+    color: #606060;
+    cursor: pointer;
+}
+.deleteCategoryItem i:hover {
+    color: crimson;
 }
 .title {
     margin: 10px;
@@ -44,8 +65,8 @@
     border-bottom: 1px solid #cccc;
 }
 .img {
-    width: 370px;
-    height: 230px;
+    width: 350px;
+    height: 210px;
     border-bottom: 1px solid white;
 }
 .infoBlock {
@@ -59,4 +80,10 @@
 }
 .ListGroupItem {
     color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ListGroupItem a {
+    width: 70%;
 }

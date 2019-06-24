@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import './Information.css';
 import {Link, NavLink} from "react-router-dom";
 import {Button, Col, ListGroup, ListGroupItem, Modal, ModalFooter, Row} from "reactstrap";
-import {fetchCategories} from "../../store/actons/categoryActions";
+import {deleteCategory, fetchCategories} from "../../store/actons/categoryActions";
 
 class Information extends Component {
 
@@ -46,25 +46,43 @@ class Information extends Component {
     };
 
     deleteInfoHandler = ( id) => {
-        this.props.delteInfo(id);
+        this.props.deleteInfo(id);
         this.props.history.push('/')
     };
 
+    editCategory = (id) => {
+        this.props.history.push('/edit/category/' + id)
+    };
+
     render() {
-
-        console.log(this.props.user);
-
         const categories = this.props.categories ? this.props.categories.map(category => {
             return (
-                <ListGroupItem
-                    onClick={() => this.categoryName(category)}
-                    className="ListGroupItem"
-                    key={category._id}
-                    tag={NavLink}
-                    to={"/category/" + category._id}
-                >
-                    {category.title}
-                </ListGroupItem>
+                <div key={category._id} style={{position: 'relative'}}>
+
+                    {this.props.user &&
+                    this.props.user.role === "aidaraliuulu@gmail.com" ?
+                        <div className="deleteCategoryItem">
+                            <i onClick={() => this.props.deleteCategory(category._id)}
+                               className="fas fa-trash-alt"></i>
+
+                            <i onClick={() => this.editCategory(category._id)}
+                               className="far fa-edit"></i>
+                        </div>
+                        :null
+                    }
+
+                    <ListGroupItem
+                        onClick={() => this.categoryName(category)}
+                        className="ListGroupItem"
+                        tag={NavLink}
+                        to={"/category/" + category._id}
+                    >
+                        {category.title}
+                        <div className="deleteCategory">
+
+                        </div>
+                    </ListGroupItem>
+                </div>
             )
         }) : null;
 
@@ -73,7 +91,8 @@ class Information extends Component {
                 <div  key={item._id} className="RegionItem">
                     <div className="RegionItemBody">
                         {this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
-                            <i onClick={() => this.deleteInfoHandler(item._id)} className="fas fa-backspace"></i>
+                            <i onClick={() => this.deleteInfoHandler(item._id)}
+                               className="fas fa-trash-alt deleteInfo"></i>
                             :null
                         }
                         <img className="img"
@@ -91,7 +110,7 @@ class Information extends Component {
         return (
             <div className="infoContent" style={{marginTop: "20px"}}>
                 <Row>
-                    <Col sm={3}>
+                    <Col sm={4}>
                         {
                             this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
                                 <div style={{marginBottom: '10px'}}>
@@ -114,7 +133,7 @@ class Information extends Component {
 
                         </ListGroup>
                     </Col>
-                    <Col sm={9}>
+                    <Col sm={8}>
                         <div className="infoBlock">
                             <h5 className="infoText">
                                 <strong>
@@ -173,7 +192,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchInformation: categoryId => dispatch(fetchInformation(categoryId)),
     fetchCategories: () => dispatch(fetchCategories()),
-    delteInfo: id => dispatch(deleteInfo(id))
+    deleteInfo: id => dispatch(deleteInfo(id)),
+    deleteCategory: categoryId => dispatch(deleteCategory(categoryId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Information);

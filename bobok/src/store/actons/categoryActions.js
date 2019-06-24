@@ -12,9 +12,22 @@ export const fetchCategories = () => {
   return dispatch => {
       return axios.get('/category').then(
           response => {
-              console.log(response.data);
               dispatch(fetchCategoriesSuccess(response.data))
           }
       )
   }
+};
+
+export const createCategory = category => {
+    return dispatch => {
+        return axios.post('/category', category);
+    }
+};
+
+export const deleteCategory = categoryId => {
+    return dispatch => {
+        return axios.delete('/category/' + categoryId).then(
+            dispatch(fetchCategories())
+        )
+    }
 };

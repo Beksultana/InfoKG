@@ -16,4 +16,10 @@ router.post('/', (req, res) => {
        .catch(error => res.send(error))
 });
 
+router.delete('/:id', (req, res) => {
+    Category.findByIdAndDelete({_id: req.params.id})
+        .then(result => res.send(result))
+        .catch(error => res.send(error))
+});
+
 module.exports = router;

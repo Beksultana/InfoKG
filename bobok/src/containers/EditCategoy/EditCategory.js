@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {createCategory} from "../../store/actons/categoryActions";
 import {Button, Col, Form, FormGroup, FormText, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
 
-class NewCategory extends Component {
+class EditCategory extends Component {
 
     state = {
         title: ''
@@ -15,10 +14,6 @@ class NewCategory extends Component {
         });
     };
 
-    createCategoryHandler = (data) => {
-        this.props.createCategory(data);
-        this.props.history.push('/');
-    };
 
     render() {
         return (
@@ -35,7 +30,7 @@ class NewCategory extends Component {
                                 onChange={this.inputChangeHandler}
                             />
                             <FormText color="muted">
-                                Жаны категориянын аталышын жазыныз!
+                                Эски категорияны жаны аталышка озгортунуз!
                             </FormText>
                         </Col>
                     </FormGroup>
@@ -44,8 +39,7 @@ class NewCategory extends Component {
                         <Col sm={{ size: 10, offset: 2 }}>
                             <Button
                                 color="success"
-                                onClick={() => this.createCategoryHandler({...this.state})}
-                            >Кошуу</Button>
+                            >Озгортуу</Button>
                         </Col>
                     </FormGroup>
                 </Form>
@@ -54,8 +48,12 @@ class NewCategory extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    createCategory: categoryData => dispatch(createCategory(categoryData))
+const mapStateToProps = state => ({
+
 });
 
-export default connect(null, mapDispatchToProps)(NewCategory);
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditCategory);

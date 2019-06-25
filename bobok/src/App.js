@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react';
 import Toolbar from "./components/UI/Toolbar/Toolbar";
 import {Container} from "reactstrap";
 import {Route, Switch, withRouter} from "react-router";
-import Regions from "./containers/Information/Information";
 import NewInfo from "./containers/NewInfo/NewInfo";
 import Register from "./containers/Register/Register";
 import {NotificationContainer} from "react-notifications";
@@ -12,6 +11,7 @@ import {logoutUser} from "./store/actons/usersActions";
 import {connect} from "react-redux";
 import NewCategory from "./containers/NewCategory/NewCategory";
 import EditCategory from "./containers/EditCategoy/EditCategory";
+import Information from "./containers/Information/Information";
 
 
 class App extends Component {
@@ -27,13 +27,13 @@ class App extends Component {
               </header>
               <Container>
                   <Switch>
-                      <Route path="/" exact component={Regions}/>
-                      <Route path="/category/:id" component={Regions}/>
+                      <Route path="/" exact component={Information}/>
+                      <Route path="/categories/:id" component={Information}/>
                       <Route path="/new/information" component={NewInfo}/>
                       <Route path="/register" component={Register}/>
                       <Route path="/login" component={Login}/>
                       <Route path="/new/category" component={NewCategory}/>
-                      <Route path="/edit/category/:id" component={EditCategory}/>
+                      <Route path="/category/:id" component={EditCategory}/>
                   </Switch>
               </Container>
           </Fragment>

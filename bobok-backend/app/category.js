@@ -9,6 +9,12 @@ router.get('/', (req, res) => {
         .catch(error => res.send(error))
 });
 
+router.get('/:id', (req, res) => {
+    Category.findById({_id: req.params.id})
+        .then(result => res.send(result))
+        .catch(error => res.send(error))
+});
+
 router.post('/', (req, res) => {
    const category = new Category(req.body);
     category.save()
@@ -18,6 +24,13 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     Category.findByIdAndDelete({_id: req.params.id})
+        .then(result => res.send(result))
+        .catch(error => res.send(error))
+});
+
+router.put('/:id', (req, res) => {
+    const obj = req.body;
+    Category.updateOne({_id: req.params.id}, obj)
         .then(result => res.send(result))
         .catch(error => res.send(error))
 });

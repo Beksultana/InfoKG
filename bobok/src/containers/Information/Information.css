@@ -23,15 +23,17 @@
     position: relative;
 }
 .deleteInfo {
+    cursor: pointer;
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 25px;
-    color: #eee;
+    top: -1px;
+    right: 0;
+    font-size: 20px;
+    color: #606060;
+    padding: 15px;
+    background: white;
 }
 .deleteInfo:hover {
-    color: #fff;
-    font-size: 30px;
+    color: crimson;
 }
 .deleteCategory {
     width: 30%;

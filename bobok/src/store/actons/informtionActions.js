@@ -21,7 +21,7 @@ export const fetchInformation = (categoryId) => {
         let path = '/information';
 
         if (categoryId) {
-            path += '?category=' + categoryId
+            path += '?categories=' + categoryId
         }
 
         return axios.get(path).then(
@@ -33,7 +33,8 @@ export const fetchInformation = (categoryId) => {
 };
 
 export const deleteInfo = id => {
-    return dispatch => {
-        return axios.delete('/information/' +id);
+    return async dispatch => {
+        await axios.delete('/information/' +id);
+        await dispatch(fetchInformation());
     }
 };

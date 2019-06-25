@@ -21,6 +21,7 @@ class NewCategory extends Component {
     };
 
     render() {
+        console.log(this.props.category);
         return (
             <div style={{marginTop: '40px'}}>
                 <Form>
@@ -55,7 +56,7 @@ class NewCategory extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    createCategory: categoryData => dispatch(createCategory(categoryData))
+    createCategory: categoryData => dispatch(createCategory(categoryData)),
 });
 
 export default connect(null, mapDispatchToProps)(NewCategory);

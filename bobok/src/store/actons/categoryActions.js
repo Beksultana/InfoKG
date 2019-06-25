@@ -1,12 +1,10 @@
 import axios from '../../axios-api';
-import {FETCH_CATEGORIES_SUCCESS} from "./actionsType";
+import  {push} from 'connected-react-router';
+import {FETCH_CATEGORIES_BY_ID_SUCCESS, FETCH_CATEGORIES_SUCCESS} from "./actionsType";
 
 
-const fetchCategoriesSuccess = categories => {
-    return (
-        {type: FETCH_CATEGORIES_SUCCESS, categories}
-    )
-};
+const fetchCategoriesSuccess = categories => ({type: FETCH_CATEGORIES_SUCCESS, categories});
+const fetchCategoriesByIdSuccess = category => ({type: FETCH_CATEGORIES_BY_ID_SUCCESS, category});
 
 export const fetchCategories = () => {
   return dispatch => {
@@ -25,9 +23,26 @@ export const createCategory = category => {
 };
 
 export const deleteCategory = categoryId => {
+    return async dispatch => {
+        await axios.delete('/category/' + categoryId);
+        await dispatch(fetchCategories())
+    }
+};
+
+export const fetchCategoryById = id => {
     return dispatch => {
-        return axios.delete('/category/' + categoryId).then(
-            dispatch(fetchCategories())
+        return axios.get('/category/' + id).then(
+            response => {
+                dispatch(fetchCategoriesByIdSuccess(response.data))
+            }
+        )
+    }
+};
+
+export const editCategory = (id, data) => {
+    return dispatch => {
+        return axios.put(`/category/${id}`, data).then(
+            dispatch(push('/'))
         )
     }
 };

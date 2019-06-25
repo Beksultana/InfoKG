@@ -124,7 +124,7 @@ class NewInfo extends Component {
 
                         <FormGroup check row>
                             <Col sm={{ size: 10, offset: 3 }}>
-                                <Button type="submit" color="primary">Кошуу</Button>
+                                <Button type="submit" color="success">Кошуу</Button>
                             </Col>
                         </FormGroup>
                     </Form>

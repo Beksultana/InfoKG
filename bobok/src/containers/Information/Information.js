@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import './Information.css';
 import {Link, NavLink} from "react-router-dom";
 import {Button, Col, ListGroup, ListGroupItem, Modal, ModalFooter, Row} from "reactstrap";
-import {deleteCategory, fetchCategories} from "../../store/actons/categoryActions";
+import {deleteCategory, fetchCategories, fetchCategoryById} from "../../store/actons/categoryActions";
 
 class Information extends Component {
 
@@ -51,7 +51,7 @@ class Information extends Component {
     };
 
     editCategory = (id) => {
-        this.props.history.push('/edit/category/' + id)
+        this.props.history.push('/category/' + id)
     };
 
     render() {
@@ -63,10 +63,10 @@ class Information extends Component {
                     this.props.user.role === "aidaraliuulu@gmail.com" ?
                         <div className="deleteCategoryItem">
                             <i onClick={() => this.props.deleteCategory(category._id)}
-                               className="fas fa-trash-alt"></i>
+                               className="fas fa-trash-alt"/>
 
                             <i onClick={() => this.editCategory(category._id)}
-                               className="far fa-edit"></i>
+                               className="far fa-edit"/>
                         </div>
                         :null
                     }
@@ -86,21 +86,29 @@ class Information extends Component {
             )
         }) : null;
 
-        const information = this.props.information ? this.props.information.map(item => {
+        const information = this.props.information
+            ? this.props.information.map(item => {
             return (
                 <div  key={item._id} className="RegionItem">
                     <div className="RegionItemBody">
                         {this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
                             <i onClick={() => this.deleteInfoHandler(item._id)}
-                               className="fas fa-trash-alt deleteInfo"></i>
+                               className="fas fa-trash-alt deleteInfo"/>
                             :null
                         }
+
                         <img className="img"
                              src={"http://localhost:8000/uploads/" + item.image}
                              alt="Card image cap"
                         />
+
                         <div style={{width: "250px", margin: "0 auto"}}>
-                            <h6 onClick={() => this.showModal(item)} className="title"><strong>{item.name}</strong></h6>
+
+                            <h6 onClick={() => this.showModal(item)} className="title">
+                                <strong>
+                                    {item.name}
+                                 </strong>
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -114,7 +122,7 @@ class Information extends Component {
                         {
                             this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
                                 <div style={{marginBottom: '10px'}}>
-                                <Button onClick={this.newCategory} color="warning">
+                                <Button onClick={this.newCategory} color="success">
                                     Жаны категория кошуу
                                 </Button>
                             </div> : null
@@ -144,7 +152,7 @@ class Information extends Component {
                             {
                                 this.props.user && this.props.user.role === "aidaraliuulu@gmail.com" ?
                                 <Link to="/new/information">
-                                <Button color="warning" >Жаны маалмат кошуу</Button>
+                                <Button color="success" >Жаны маалмат кошуу</Button>
                                 </Link> : null
                             }
                         </div>
@@ -193,7 +201,7 @@ const mapDispatchToProps = dispatch => ({
     fetchInformation: categoryId => dispatch(fetchInformation(categoryId)),
     fetchCategories: () => dispatch(fetchCategories()),
     deleteInfo: id => dispatch(deleteInfo(id)),
-    deleteCategory: categoryId => dispatch(deleteCategory(categoryId))
+    deleteCategory: categoryId => dispatch(deleteCategory(categoryId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Information);

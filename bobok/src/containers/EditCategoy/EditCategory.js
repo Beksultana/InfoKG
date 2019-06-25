@@ -1,12 +1,24 @@
 import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, FormText, Input, Label} from "reactstrap";
 import {connect} from "react-redux";
+import {editCategory, fetchCategoryById} from "../../store/actons/categoryActions";
 
-class EditCategory extends Component {
+class EditCategory  extends Component {
 
     state = {
         title: ''
     };
+
+    componentDidMount () {
+        if (this.props.match.params.id) {
+            this.props.fetchCategory(this.props.match.params.id).then(
+                () => {
+                    this.setState({title: this.props.category.title})
+                }
+            )
+        }
+
+    }
 
     inputChangeHandler = event => {
         this.setState({
@@ -16,6 +28,7 @@ class EditCategory extends Component {
 
 
     render() {
+
         return (
             <div style={{marginTop: '40px'}}>
                 <Form>
@@ -38,6 +51,7 @@ class EditCategory extends Component {
                     <FormGroup check row>
                         <Col sm={{ size: 10, offset: 2 }}>
                             <Button
+                                onClick={() => this.props.editCategory(this.props.match.params.id, {...this.state})}
                                 color="success"
                             >Озгортуу</Button>
                         </Col>
@@ -49,11 +63,12 @@ class EditCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-
+    category: state.information.category
 });
 
 const mapDispatchToProps = dispatch => ({
-
+    fetchCategory: id => dispatch(fetchCategoryById(id)),
+    editCategory: (id, data) => dispatch(editCategory(id, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCategory);

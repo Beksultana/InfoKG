@@ -57,4 +57,11 @@ router.delete('/:id', (req, res) => {
        .catch(error => res.send(error))
 });
 
+router.put("/:id", (req, res) => {
+    const obj = req.body;
+    Information.updateOne({_id: req.params.id}, obj)
+        .then(result => res.send(result))
+        .catch(() => res.status(500).send({message: "edit not found"}))
+})
+
 module.exports = router;

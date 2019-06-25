@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import './Information.css';
 import {Link, NavLink} from "react-router-dom";
 import {Button, Col, ListGroup, ListGroupItem, Modal, ModalFooter, Row} from "reactstrap";
-import {deleteCategory, fetchCategories, fetchCategoryById} from "../../store/actons/categoryActions";
+import {deleteCategory, fetchCategories} from "../../store/actons/categoryActions";
 
 class Information extends Component {
 
@@ -50,10 +50,6 @@ class Information extends Component {
         this.props.history.push('/')
     };
 
-    editCategory = (id) => {
-        this.props.history.push('/category/' + id)
-    };
-
     render() {
         const categories = this.props.categories ? this.props.categories.map(category => {
             return (
@@ -64,9 +60,6 @@ class Information extends Component {
                         <div className="deleteCategoryItem">
                             <i onClick={() => this.props.deleteCategory(category._id)}
                                className="fas fa-trash-alt"/>
-
-                            <i onClick={() => this.editCategory(category._id)}
-                               className="far fa-edit"/>
                         </div>
                         :null
                     }

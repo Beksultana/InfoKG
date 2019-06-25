@@ -10,8 +10,8 @@ import Login from "./containers/Login/Login";
 import {logoutUser} from "./store/actons/usersActions";
 import {connect} from "react-redux";
 import NewCategory from "./containers/NewCategory/NewCategory";
-import EditCategory from "./containers/EditCategoy/EditCategory";
 import Information from "./containers/Information/Information";
+
 
 
 class App extends Component {
@@ -28,12 +28,11 @@ class App extends Component {
               <Container>
                   <Switch>
                       <Route path="/" exact component={Information}/>
-                      <Route path="/categories/:id" component={Information}/>
+                      <Route path="/category/:id" component={Information}/>
                       <Route path="/new/information" component={NewInfo}/>
                       <Route path="/register" component={Register}/>
                       <Route path="/login" component={Login}/>
                       <Route path="/new/category" component={NewCategory}/>
-                      <Route path="/category/:id" component={EditCategory}/>
                   </Switch>
               </Container>
           </Fragment>

@@ -1,5 +1,4 @@
 import axios from '../../axios-api';
-import  {push} from 'connected-react-router';
 import {FETCH_CATEGORIES_BY_ID_SUCCESS, FETCH_CATEGORIES_SUCCESS} from "./actionsType";
 
 
@@ -35,14 +34,6 @@ export const fetchCategoryById = id => {
             response => {
                 dispatch(fetchCategoriesByIdSuccess(response.data))
             }
-        )
-    }
-};
-
-export const editCategory = (id, data) => {
-    return dispatch => {
-        return axios.put(`/category/${id}`, data).then(
-            dispatch(push('/'))
         )
     }
 };

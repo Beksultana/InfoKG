@@ -28,11 +28,5 @@ router.delete('/:id', (req, res) => {
         .catch(error => res.send(error))
 });
 
-router.put('/:id', (req, res) => {
-    const obj = req.body;
-    Category.updateOne({_id: req.params.id}, obj)
-        .then(result => res.send(result))
-        .catch(error => res.send(error))
-});
 
 module.exports = router;

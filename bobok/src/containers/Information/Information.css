@@ -44,8 +44,6 @@
     margin-top: -10px;
     right: 0;
     z-index: 100;
-    display: flex;
-    justify-content: flex-end;
 }
 .deleteCategoryItem > i {
     margin: 0 5px;

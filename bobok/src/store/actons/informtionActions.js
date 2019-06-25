@@ -21,7 +21,7 @@ export const fetchInformation = (categoryId) => {
         let path = '/information';
 
         if (categoryId) {
-            path += '?categories=' + categoryId
+            path += '?category=' + categoryId
         }
 
         return axios.get(path).then(
